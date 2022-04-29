@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KOCHAM JAVA SPARK</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h2>01: zarządzacz samochodów</h2>
+    <div class="container">
+        <form method="get" action="add">
+            <input type="text" name="model" id="markInput"><br>
+            <select name="doors">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select><br>
+            <input type="checkbox" name="damaged" id="damaged"><br>
+            <input type="radio" name="country" value="pl"> polski <br>
+            <input type="radio" name="country" value="en"> angielski <br>
+            <input type="submit" value="dodaj">
+        </form>
+        <br>
+        linki do danych:
+        <a href="/text">text</a>
+        <a href="/json">json</a>
+        <a href="/html">html</a>
+    </div>
+    <h2>02: post, fetch</h2>
+    <div class="container">
+        <div class="form2">
+            model: <br>
+            <input type="text" name="model" id="modelInput"><br>
+            rok: <br>
+            <select name="year" id="year">
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+            </select><br>
+            poduszki powietrzne: kierowca | pasażer | tylna kanapa | boczne z tyłu :
+            <input type="checkbox" name="dairbag" id="dairbag">
+            <input type="checkbox" name="pairbag" id="pairbag">
+            <input type="checkbox" name="bairbag" id="bairbag">
+            <input type="checkbox" name="sairbag" id="sairbag">
+            <br>
+            <input type="color" name="color" id="color">
+            <br>
+            <input type="submit" value="dodaj" id="submit2">
+        </div>
+        <a href="cars.html">strona z danymi</a>
+    </div>
+</body>
+</html>

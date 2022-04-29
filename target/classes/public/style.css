@@ -1,0 +1,9 @@
+body {
+    background-color: azure;
+}
+form > * {
+    margin: 5px;
+}
+table, td {
+    border: 1px solid gray;
+}
