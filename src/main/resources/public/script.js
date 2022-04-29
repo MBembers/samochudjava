@@ -7,21 +7,22 @@ async function addCar(){
     const airbags = [
         {
             name: "dairbag",
-            value: document.getElementById("dairbag").value
+            value: document.getElementById("dairbag").checked
         },
         {
             name: "pairbag",
-            value: document.getElementById("pairbag").value
+            value: document.getElementById("pairbag").checked
         },
         {
             name: "bairbag",
-            value: document.getElementById("bairbag").value
+            value: document.getElementById("bairbag").checked
         },
         {
             name: "sairbag",
-            value: document.getElementById("sairbag").value
+            value: document.getElementById("sairbag").checked
         }
     ]
+    console.log(airbags)
     const year = document.getElementById("year").value
     const color = document.getElementById("color").value
 

@@ -1,14 +1,23 @@
-public class Car {
-    public String model;
-    public int doors;
-    public boolean damaged;
-    public String country;
+import com.fasterxml.uuid.Generators;
 
-    public Car(int doors, boolean damaged, String model, String country) {
-        this.doors = doors;
-        this.damaged = damaged;
+import java.util.ArrayList;
+import java.util.UUID;
+
+public class Car {
+    public int id = 0;
+    public String uuid;
+    public String model;
+    public String year;
+    public ArrayList<Airbag> airbags;
+    public String color;
+
+    public Car(int id, String model, String year, ArrayList<Airbag> airbags, String color) {
+        this.id = id;
         this.model = model;
-        this.country = country;
+        this.year = year;
+        this.airbags = airbags;
+        this.color = color;
     }
 
+    // ZROB GETTERY I SETTERY XDDASLDADAS
 }

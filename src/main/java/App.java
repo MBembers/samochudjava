@@ -1,27 +1,21 @@
 import static spark.Spark.*;
 
+import com.fasterxml.uuid.Generators;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class App {
-    public static ArrayList<Car> cars;
-    public static ArrayList<Car2> car2s = new ArrayList<Car2>();
-    public static int car2sCount = 0;
+    public static ArrayList<CarOld> carsOld;
+    public static ArrayList<Car> cars = new ArrayList<Car>();
+    public static int carsCount = 0;
     public static void main(String[] args) {
         port(5000);
-        cars = new ArrayList<Car>();
+        carsOld = new ArrayList<CarOld>();
         staticFiles.location("/public");
-        get("/test", (req, res) -> "test");
-        get("/add", (req, res) -> addCar(req, res));
-        get("/text", (req, res) -> getText(req, res));
-        get("/json", (req, res) -> getJson(req, res));
-        get("/html", (req, res) -> getHtml(req, res));
-        get("/deleteall", (req, res) -> deleteAll(req, res));
-        get("/delete/:id", (req, res) -> delete(req, res));
-        get("/update/:id", (req, res) -> update(req, res));
 
         post("/add", (req, res) -> addCarPost(req, res));
         post("/json", (req, res) -> getJsonPost(req, res));
@@ -31,34 +25,34 @@ public class App {
     }
 
     static String addCar(Request req, Response res) {
-        Car newCar = new Car(Integer.parseInt(req.queryParams("doors")), req.queryParams("damaged") == "on" ? true : false, req.queryParams("model"), req.queryParams("country"));
-        cars.add(newCar);
+        CarOld newCar = new CarOld(Integer.parseInt(req.queryParams("doors")), req.queryParams("damaged") == "on" ? true : false, req.queryParams("model"), req.queryParams("country"));
+        carsOld.add(newCar);
         res.type("application/json");
-        return "dodano samochod, ilosc samochodow: " + cars.size();
+        return "dodano samochod, ilosc samochodow: " + carsOld.size();
     }
 
     static String getText(Request req, Response res) {
         Gson gson = new Gson();
-        return gson.toJson(cars, ArrayList.class );
+        return gson.toJson(carsOld, ArrayList.class );
     }
     static String getJson(Request req, Response res) {
         res.type("application/json");
         Gson gson = new Gson();
-        return gson.toJson(cars, ArrayList.class );
+        return gson.toJson(carsOld, ArrayList.class );
     }
 
     static String deleteAll(Request req, Response res) {
-        cars = new ArrayList<Car>();
+        carsOld = new ArrayList<CarOld>();
         return "Deleted all";
     }
     static String delete(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-        cars.remove(id);
+        carsOld.remove(id);
         return "Deleted " + id;
     }
     static String update(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-        Car car = cars.get(id);
+        CarOld car = carsOld.get(id);
         if(req.queryParams("model") != null){
             car.model = req.queryParams("model");
         }
@@ -77,7 +71,7 @@ public class App {
         res.type("text/html");
         String response = "<table style='border: 1px solid gray'>";
         int i = 0;
-        for(Car car : cars){
+        for(CarOld car : carsOld){
             response += String.format("<tr><td style='border: 1px solid gray'>%d</td><td style='border: 1px solid gray'>%s</td><td style='border: 1px solid gray'>%b</td><td style='border: 1px solid gray'>%d</td><td style='border: 1px solid gray'>%s</td></tr>", i, car.model, car.damaged, car.doors, car.country);
             i++;
         }
@@ -89,20 +83,25 @@ public class App {
         res.type("application/json");
         Gson gson = new Gson();
         System.out.println(req.body());
-        Car2 newCar2 = gson.fromJson(req.body(), Car2.class);
-        car2sCount++;
-        newCar2.id = car2sCount;
-        car2s.add(newCar2);
-        return gson.toJson(newCar2);
+        Car newCar = gson.fromJson(req.body(), Car.class);
+        carsCount++;
+        newCar.id = carsCount;
+        newCar.uuid = Generators.randomBasedGenerator().generate().toString();
+        cars.add(newCar);
+        return gson.toJson(newCar);
     }
     static String getJsonPost(Request req, Response res){
         res.type("application/json");
         Gson gson = new Gson();
-        return gson.toJson(car2s);
+        return gson.toJson(cars);
     }
 
     static String deleteCarPost(Request req, Response res){
-        return "aa";
+        res.type("text/html");
+        Gson gson = new Gson();
+        String uuid = gson.fromJson(req.body(), Car.class).uuid;
+        boolean deleted = cars.removeIf(car -> Objects.equals(car.uuid, uuid));
+        return deleted ? "true" : "false";
     }
 
     static String updateCarPost(Request req, Response res){

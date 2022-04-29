@@ -7,3 +7,6 @@ form > * {
 table, td {
     border: 1px solid gray;
 }
+td {
+    min-width: 90px;
+}
