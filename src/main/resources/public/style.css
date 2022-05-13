@@ -1,5 +1,5 @@
 :root {
-    --overlay-visibility: none
+    --overlay-display: none
 }
 body {
     background-color: azure;
@@ -13,3 +13,22 @@ table, td {
 td {
     min-width: 90px;
 }
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(0, 0%, 40%, 30%);
+    z-index: 100;
+    display: var(--overlay-display);
+    align-items: center;
+    justify-content: center;
+}
+.modal-buttons{
+    width: 30vw;
+    /*height: 300px;*/
+    display: flex;
+    flex-direction: column;
+}
+

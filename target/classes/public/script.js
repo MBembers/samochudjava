@@ -1,3 +1,13 @@
+let yearSelect = document.getElementById('year')
+
+for(let i = 1998; i < 2020; i++){
+    let option = document.createElement("option");
+    option.text = i.toString();
+    option.value = i.toString();
+    yearSelect.appendChild(option);
+}
+
+
 let submitBtn = document.getElementById("submit2")
 
 submitBtn.addEventListener("click", async () => await addCar())
@@ -37,5 +47,5 @@ async function addCar(){
     })
 
     const data = await response.json()
-    alert(JSON.stringify(data, null, 3))
+    // alert(JSON.stringify(data, null, 3))
 }

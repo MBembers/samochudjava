@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Samochody</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script2.js" defer></script>
+    <script src="script-cars.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -12,5 +12,15 @@
 
         </table>
     </div>
-</body>
+    <div class="overlay">
+        <div class="modal">
+            model: <input type="text" name="model" id="model-input">
+            year: <select name="year" id="year-select"></select>
+            <div class="modal-buttons">
+                <button id="modal-confirm">Confirm</button>
+                <button id="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    </body>
 </html>
